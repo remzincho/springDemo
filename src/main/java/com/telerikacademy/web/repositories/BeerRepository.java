@@ -9,10 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class BeerRepository {
+public class BeerRepository implements IBeerRepository {
     private List<Beer> beers;
 
-    @Autowired
     public BeerRepository() {
         beers = new ArrayList<>();
         beers.add(new Beer(1, "Glarus English Ale", 4.6));
@@ -20,10 +19,12 @@ public class BeerRepository {
         beers.add(new Beer(3, "Ariana", 4.8));
     }
 
+    @Override
     public List<Beer> getAll() {
         return new ArrayList<>(beers);
     }
 
+    @Override
     public Beer getById(int id) {
         return beers.stream()
                 .filter(b -> b.getId() == id)
@@ -31,10 +32,12 @@ public class BeerRepository {
                 .orElseThrow(() -> new EntityNotFoundException("Beer", id));
     }
 
+    @Override
     public void create(Beer beer) {
         beers.add(beer);
     }
 
+    @Override
     public void update(Beer beer) {
         Beer beerToUpdate = getById(beer.getId());
 
@@ -42,11 +45,13 @@ public class BeerRepository {
         beerToUpdate.setAbv(beer.getAbv());
     }
 
+    @Override
     public void delete(int id) {
         Beer beerToDelete = getById(id);
         beers.remove(beerToDelete);
     }
 
+    @Override
     public Beer getByName(String name) {
         return beers.stream()
                 .filter(b -> b.getName().equals(name))

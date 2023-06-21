@@ -3,7 +3,7 @@ package com.telerikacademy.web.controllers;
 import com.telerikacademy.web.exceptions.DuplicateEntityException;
 import com.telerikacademy.web.exceptions.EntityNotFoundException;
 import com.telerikacademy.web.models.Beer;
-import com.telerikacademy.web.services.BeerService;
+import com.telerikacademy.web.services.IBeerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +15,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/beers")
 public class BeerController {
-    private BeerService service;
+    private IBeerService service;
 
     @Autowired
-    public BeerController(BeerService service) {
+    public BeerController(IBeerService service) {
         this.service = service;
     }
 
