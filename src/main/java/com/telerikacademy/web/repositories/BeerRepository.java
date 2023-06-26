@@ -2,7 +2,8 @@ package com.telerikacademy.web.repositories;
 
 import com.telerikacademy.web.exceptions.EntityNotFoundException;
 import com.telerikacademy.web.models.Beer;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.telerikacademy.web.repositories.contracts.IBeerRepository;
+import com.telerikacademy.web.repositories.contracts.IStyleRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,12 +12,15 @@ import java.util.List;
 @Repository
 public class BeerRepository implements IBeerRepository {
     private List<Beer> beers;
+    private final IStyleRepository styleRepository;
+    private static int id=1;
 
-    public BeerRepository() {
+    public BeerRepository(IStyleRepository styleRepository) {
+        this.styleRepository = styleRepository;
         beers = new ArrayList<>();
-        beers.add(new Beer(1, "Glarus English Ale", 4.6));
-        beers.add(new Beer(2, "Rhombus Porter", 5.0));
-        beers.add(new Beer(3, "Ariana", 4.8));
+        beers.add(new Beer(id++, "Glarus English Ale", 4.6, styleRepository.getById(1)));
+        beers.add(new Beer(id++, "Rhombus Porter", 5.0, styleRepository.getById(2)));
+        beers.add(new Beer(id++, "Ariana", 4.8, styleRepository.getById(3)));
     }
 
     @Override
@@ -57,5 +61,10 @@ public class BeerRepository implements IBeerRepository {
                 .filter(b -> b.getName().equals(name))
                 .findFirst()
                 .orElseThrow(() -> new EntityNotFoundException("Beer", "name", name));
+    }
+
+    @Override
+    public int getNextBeerId() {
+        return id++;
     }
 }

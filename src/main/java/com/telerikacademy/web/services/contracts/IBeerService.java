@@ -1,10 +1,10 @@
-package com.telerikacademy.web.repositories;
+package com.telerikacademy.web.services.contracts;
 
 import com.telerikacademy.web.models.Beer;
 
 import java.util.List;
 
-public interface IBeerRepository {
+public interface IBeerService {
     List<Beer> getAll();
 
     Beer getById(int id);
@@ -15,5 +15,5 @@ public interface IBeerRepository {
 
     void delete(int id);
 
-    Beer getByName(String name);
+    int getNextBeerId();
 }

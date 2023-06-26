@@ -2,57 +2,58 @@ package com.telerikacademy.web.services;
 
 import com.telerikacademy.web.exceptions.DuplicateEntityException;
 import com.telerikacademy.web.exceptions.EntityNotFoundException;
-import com.telerikacademy.web.models.Beer;
-import com.telerikacademy.web.repositories.contracts.IBeerRepository;
-import com.telerikacademy.web.services.contracts.IBeerService;
+import com.telerikacademy.web.models.Style;
+import com.telerikacademy.web.repositories.StyleRepository;
+import com.telerikacademy.web.repositories.contracts.IStyleRepository;
+import com.telerikacademy.web.services.contracts.IStyleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BeerService implements IBeerService {
-    private IBeerRepository repository;
+public class StyleService implements IStyleService {
+    private final IStyleRepository repository;
 
     @Autowired
-    public BeerService(IBeerRepository repository) {
+    public StyleService(StyleRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public List<Beer> getAll() {
+    public List<Style> getAll() {
         return repository.getAll();
     }
 
     @Override
-    public Beer getById(int id) {
+    public Style getById(int id) {
         return repository.getById(id);
     }
 
     @Override
-    public void create(Beer beer) {
+    public void create(Style style) {
         boolean duplicateExists = true;
 
         try {
-            repository.getByName(beer.getName());
+            repository.getByName(style.getName());
         } catch (EntityNotFoundException e) {
             duplicateExists = false;
         }
 
         if (duplicateExists) {
-            throw new DuplicateEntityException("Beer", "name", beer.getName());
+            throw new DuplicateEntityException("Style", "name", style.getName());
         }
 
-        repository.create(beer);
+        repository.create(style);
     }
 
     @Override
-    public void update(Beer beer) {
+    public void update(Style style) {
         boolean duplicateExists = true;
 
         try {
-            Beer existingBeer = repository.getByName(beer.getName());
-            if (existingBeer.getId() == beer.getId()) {
+            Style existingBeer = repository.getByName(style.getName());
+            if (existingBeer.getId() == style.getId()) {
                 duplicateExists = false;
             }
         } catch (EntityNotFoundException e) {
@@ -60,19 +61,14 @@ public class BeerService implements IBeerService {
         }
 
         if (duplicateExists) {
-            throw new DuplicateEntityException("Beer", "name", beer.getName());
+            throw new DuplicateEntityException("Style", "name", style.getName());
         }
 
-        repository.update(beer);
+        repository.update(style);
     }
 
     @Override
     public void delete(int id) {
         repository.delete(id);
-    }
-
-    @Override
-    public int getNextBeerId() {
-        return repository.getNextBeerId();
     }
 }
