@@ -1,7 +1,7 @@
 package com.telerikacademy.web.services.mappers;
 
 import com.telerikacademy.web.models.Beer;
-import com.telerikacademy.web.models.BeerDTO;
+import com.telerikacademy.web.models.DTOs.BeerDTO;
 import com.telerikacademy.web.models.Style;
 import com.telerikacademy.web.services.contracts.IBeerService;
 import com.telerikacademy.web.services.contracts.IStyleService;

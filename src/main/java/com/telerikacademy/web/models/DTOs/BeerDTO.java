@@ -1,4 +1,4 @@
-package com.telerikacademy.web.models;
+package com.telerikacademy.web.models.DTOs;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;

@@ -3,7 +3,7 @@ package com.telerikacademy.web.controllers;
 import com.telerikacademy.web.exceptions.DuplicateEntityException;
 import com.telerikacademy.web.exceptions.EntityNotFoundException;
 import com.telerikacademy.web.models.Beer;
-import com.telerikacademy.web.models.BeerDTO;
+import com.telerikacademy.web.models.DTOs.BeerDTO;
 import com.telerikacademy.web.services.contracts.IBeerService;
 import com.telerikacademy.web.services.mappers.BeerMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,13 @@
 package com.telerikacademy.web.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 public class Beer {
+    @JsonIgnore
     private int id;
     @NotNull(message = "Name can't be empty")
     @Size(min = 2, max = 20, message = "Name should be between 2 and 20 symbols")

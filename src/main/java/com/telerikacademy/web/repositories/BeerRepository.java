@@ -13,7 +13,7 @@ import java.util.List;
 public class BeerRepository implements IBeerRepository {
     private List<Beer> beers;
     private final IStyleRepository styleRepository;
-    private static int id=1;
+    private static int id = 1;
 
     public BeerRepository(IStyleRepository styleRepository) {
         this.styleRepository = styleRepository;
