@@ -21,12 +21,12 @@ public class BeerMapper {
 
     public Beer dtoToObject(BeerDTO beerDTO){
         Beer beer = new Beer();
-        Style style = styleService.getById(beerDTO.getStyleId());
+        //Style style = styleService.getById(beerDTO.getStyleId());
         int id = beerService.getNextBeerId();
         beer.setId(id);
         beer.setName(beerDTO.getName());
         beer.setAbv(beerDTO.getAbv());
-        beer.setStyle(style);
+        //beer.setStyle(style);
         return beer;
     }
 }

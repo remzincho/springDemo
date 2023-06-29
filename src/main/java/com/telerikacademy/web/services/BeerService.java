@@ -30,6 +30,11 @@ public class BeerService implements IBeerService {
     }
 
     @Override
+    public Beer getByName(String name) {
+        return repository.getByName(name);
+    }
+
+    @Override
     public void create(Beer beer) {
         boolean duplicateExists = true;
 

@@ -8,6 +8,7 @@ public interface IBeerService {
     List<Beer> getAll();
 
     Beer getById(int id);
+    Beer getByName(String name);
 
     void create(Beer beer);
 

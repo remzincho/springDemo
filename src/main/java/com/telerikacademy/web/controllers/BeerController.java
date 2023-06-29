@@ -40,6 +40,15 @@ public class BeerController {
         }
     }
 
+    @GetMapping("/search")
+    public Beer getByName(@RequestParam String name) {
+        try {
+            return service.getByName(name);
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+    }
+
     @PostMapping
     public Beer create(@Valid @RequestBody BeerDTO beerDTO) {
         try {
