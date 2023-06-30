@@ -75,9 +75,4 @@ public class BeerService implements IBeerService {
     public void delete(int id) {
         repository.delete(id);
     }
-
-    @Override
-    public int getNextBeerId() {
-        return repository.getNextBeerId();
-    }
 }

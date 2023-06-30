@@ -16,6 +16,4 @@ public interface IBeerRepository {
     void delete(int id);
 
     Beer getByName(String name);
-
-    int getNextBeerId();
 }

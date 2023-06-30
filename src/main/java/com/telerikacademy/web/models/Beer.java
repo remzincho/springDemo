@@ -14,11 +14,8 @@ public class Beer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="beer_id")
     private int id;
-    @NotNull(message = "Name can't be empty")
-    @Size(min = 2, max = 20, message = "Name should be between 2 and 20 symbols")
     @Column(name="name")
     private String name;
-    @Positive(message = "ABV should be positive")
     @Column(name="abv")
     private double abv;
 

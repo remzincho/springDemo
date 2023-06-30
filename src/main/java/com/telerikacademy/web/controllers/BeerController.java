@@ -52,28 +52,27 @@ public class BeerController {
     @PostMapping
     public Beer create(@Valid @RequestBody BeerDTO beerDTO) {
         try {
-            Beer beer = beerMapper.dtoToObject(beerDTO);
+            Beer beer = beerMapper.fromDto(beerDTO);
             service.create(beer);
-
             return beer;
         } catch (DuplicateEntityException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
-        }catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
-    @PutMapping
-    public Beer update(@Valid @RequestBody Beer beer) {
+    @PutMapping("/{id}")
+    public Beer update(@PathVariable int id, @Valid @RequestBody BeerDTO beerDTO) {
         try {
+            Beer beer = beerMapper.fromDto(beerDTO, id);
             service.update(beer);
+            return beer;
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (DuplicateEntityException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
         }
-
-        return beer;
     }
 
     @DeleteMapping("/{id}")

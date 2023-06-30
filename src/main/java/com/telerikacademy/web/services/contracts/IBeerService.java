@@ -15,6 +15,4 @@ public interface IBeerService {
     void update(Beer beer);
 
     void delete(int id);
-
-    int getNextBeerId();
 }
