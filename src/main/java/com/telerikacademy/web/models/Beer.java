@@ -1,11 +1,6 @@
 package com.telerikacademy.web.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="beers")
@@ -19,17 +14,11 @@ public class Beer {
     @Column(name="abv")
     private double abv;
 
-//    @NotNull
-//    private Style style;
+    @ManyToOne
+    @JoinColumn(name="style_id")
+    private Style style;
 
     public Beer() {
-    }
-
-    public Beer(int id, String name, double abv) {
-        this.id = id;
-        this.name = name;
-        this.abv = abv;
-        //this.style = style;
     }
 
     public int getId() {
@@ -56,11 +45,11 @@ public class Beer {
         this.abv = abv;
     }
 
-//    public Style getStyle() {
-//        return style;
-//    }
-//
-//    public void setStyle(Style style) {
-//        this.style = style;
-//    }
+    public Style getStyle() {
+        return style;
+    }
+
+    public void setStyle(Style style) {
+        this.style = style;
+    }
 }

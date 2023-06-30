@@ -11,13 +11,10 @@ public class BeerDTO {
     @Positive(message = "ABV should be positive")
     private double abv;
 
-//    @Positive
-//    private int styleId;
+    @Positive(message = "StyleId should be positive")
+    private int styleId;
 
-    public BeerDTO(String name, double abv) {
-        this.name = name;
-        this.abv = abv;
-        //this.styleId = styleId;
+    public BeerDTO() {
     }
 
     public String getName() {
@@ -34,5 +31,13 @@ public class BeerDTO {
 
     public void setAbv(double abv) {
         this.abv = abv;
+    }
+
+    public int getStyleId() {
+        return styleId;
+    }
+
+    public void setStyleId(int styleId) {
+        this.styleId = styleId;
     }
 }

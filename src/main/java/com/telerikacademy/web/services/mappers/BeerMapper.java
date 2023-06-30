@@ -2,17 +2,21 @@ package com.telerikacademy.web.services.mappers;
 
 import com.telerikacademy.web.models.Beer;
 import com.telerikacademy.web.models.DTOs.BeerDTO;
+import com.telerikacademy.web.models.Style;
 import com.telerikacademy.web.repositories.contracts.IBeerRepository;
+import com.telerikacademy.web.repositories.contracts.IStyleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BeerMapper {
     private final IBeerRepository beerRepository;
+    private final IStyleRepository styleRepository;
 
     @Autowired
-    public BeerMapper(IBeerRepository beerRepository) {
+    public BeerMapper(IBeerRepository beerRepository, IStyleRepository styleRepository) {
         this.beerRepository = beerRepository;
+        this.styleRepository = styleRepository;
     }
     public Beer fromDto(BeerDTO beerDTO) {
         Beer beer = new Beer();
@@ -27,7 +31,9 @@ public class BeerMapper {
     }
 
     private void dtoToObject(BeerDTO beerDTO, Beer beer) {
+        Style style = styleRepository.getById(beerDTO.getStyleId());
         beer.setName(beerDTO.getName());
         beer.setAbv(beerDTO.getAbv());
+        beer.setStyle(style);
     }
 }
