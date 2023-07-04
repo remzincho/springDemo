@@ -26,4 +26,9 @@ public class UserService implements IUserService {
     public User getById(int id) {
         return repository.getById(id);
     }
+
+    @Override
+    public User getByUsername(String username) {
+        return repository.getByUsername(username);
+    }
 }

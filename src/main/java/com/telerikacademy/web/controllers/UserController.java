@@ -43,4 +43,13 @@ public class UserController {
     public List<Beer> getWishList(@PathVariable int id) {
         return new ArrayList<>(getById(id).getWishList());
     }
+
+    @GetMapping("/{username}")
+    public User getByUsername(@PathVariable String username) {
+        try {
+            return service.getByUsername(username);
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+    }
 }

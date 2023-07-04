@@ -38,4 +38,19 @@ public class UserRepository implements IUserRepository {
             return user;
         }
     }
+
+    @Override
+    public User getByUsername(String username) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<User> query = session.createQuery("FROM User WHERE username = :username", User.class);
+            query.setParameter("username", username);
+
+            List<User> result = query.list();
+            if (result.size() == 0) {
+                throw new EntityNotFoundException("User", "username", username);
+            }
+
+            return result.get(0);
+        }
+    }
 }

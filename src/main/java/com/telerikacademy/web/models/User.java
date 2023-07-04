@@ -23,6 +23,9 @@ public class User {
     private String lastName;
     @Column(name = "email")
     private String email;
+    @Column(name = "is_admin")
+    private boolean isAdmin;
+
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -81,6 +84,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public Set<Beer> getWishList() {

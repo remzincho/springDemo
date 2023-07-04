@@ -2,7 +2,9 @@ package com.telerikacademy.web.services;
 
 import com.telerikacademy.web.exceptions.DuplicateEntityException;
 import com.telerikacademy.web.exceptions.EntityNotFoundException;
+import com.telerikacademy.web.exceptions.UnauthorizedOperationException;
 import com.telerikacademy.web.models.Beer;
+import com.telerikacademy.web.models.User;
 import com.telerikacademy.web.repositories.contracts.IBeerRepository;
 import com.telerikacademy.web.services.contracts.IBeerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +54,10 @@ public class BeerService implements IBeerService {
     }
 
     @Override
-    public void update(Beer beer) {
+    public void update(Beer beer, User user) {
+        if (!user.isAdmin()){
+            throw new UnauthorizedOperationException("Only admins can modify beer.");
+        }
         boolean duplicateExists = true;
 
         try {
@@ -72,7 +77,10 @@ public class BeerService implements IBeerService {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(int id, User user) {
+        if (!user.isAdmin()){
+            throw new UnauthorizedOperationException("Only admins can delete beer.");
+        }
         repository.delete(id);
     }
 }
