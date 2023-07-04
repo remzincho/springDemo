@@ -15,6 +15,9 @@ public class Beer {
     private double abv;
 
     @ManyToOne
+    @JoinColumn(name="user_id")
+    private User ownerId;
+    @ManyToOne
     @JoinColumn(name="style_id")
     private Style style;
 
@@ -51,5 +54,13 @@ public class Beer {
 
     public void setStyle(Style style) {
         this.style = style;
+    }
+
+    public User getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(User ownerId) {
+        this.ownerId = ownerId;
     }
 }

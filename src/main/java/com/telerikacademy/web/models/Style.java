@@ -1,7 +1,6 @@
 package com.telerikacademy.web.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Entity
