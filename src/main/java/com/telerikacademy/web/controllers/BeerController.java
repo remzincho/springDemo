@@ -57,9 +57,8 @@ public class BeerController {
     @PostMapping
     public Beer create(@RequestHeader HttpHeaders headers, @Valid @RequestBody BeerDTO beerDTO) {
         try {
-            User user = authenticationHelper.tryGetUser(headers);
             Beer beer = beerMapper.fromDto(beerDTO);
-            service.create(beer);
+            service.create(beer, headers);
             return beer;
         } catch (DuplicateEntityException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());

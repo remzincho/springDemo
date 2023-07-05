@@ -10,8 +10,6 @@ public class BeerDTO {
     private String name;
     @Positive(message = "ABV should be positive")
     private double abv;
-    @NotNull(message = "Every create request goes by ownerId")
-    private int ownerId;
 
     @Positive(message = "StyleId should be positive")
     private int styleId;
@@ -41,13 +39,5 @@ public class BeerDTO {
 
     public void setStyleId(int styleId) {
         this.styleId = styleId;
-    }
-
-    public int getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
     }
 }

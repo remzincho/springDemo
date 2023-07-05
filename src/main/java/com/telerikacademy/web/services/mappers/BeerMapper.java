@@ -36,10 +36,10 @@ public class BeerMapper {
 
     private void dtoToObject(BeerDTO beerDTO, Beer beer) {
         Style style = styleRepository.getById(beerDTO.getStyleId());
-        User user = userRepository.getById(beerDTO.getOwnerId());
+        //User user = userRepository.getById(beerDTO.getOwnerId());
         beer.setName(beerDTO.getName());
         beer.setAbv(beerDTO.getAbv());
         beer.setStyle(style);
-        beer.setOwnerId(user);
+        //beer.setOwner(user);
     }
 }
