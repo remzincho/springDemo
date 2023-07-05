@@ -8,5 +8,8 @@ public interface IUserRepository {
     List<User> getAll();
 
     User getById(int id);
+
     User getByUsername(String username);
+
+    void create(User user);
 }

@@ -1,5 +1,7 @@
 package com.telerikacademy.web.services;
 
+import com.telerikacademy.web.exceptions.DuplicateEntityException;
+import com.telerikacademy.web.exceptions.EntityNotFoundException;
 import com.telerikacademy.web.models.User;
 import com.telerikacademy.web.repositories.contracts.IUserRepository;
 import com.telerikacademy.web.services.contracts.IUserService;
@@ -30,5 +32,21 @@ public class UserService implements IUserService {
     @Override
     public User getByUsername(String username) {
         return repository.getByUsername(username);
+    }
+
+    @Override
+    public void create(User user) {
+        boolean duplicateExists = true;
+        try {
+            repository.getByUsername(user.getUsername());
+        } catch (EntityNotFoundException e) {
+            duplicateExists = false;
+        }
+
+        if (duplicateExists) {
+            throw new DuplicateEntityException("User", "username", user.getUsername());
+        }
+
+        repository.create(user);
     }
 }

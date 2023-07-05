@@ -53,4 +53,11 @@ public class UserRepository implements IUserRepository {
             return result.get(0);
         }
     }
+
+    @Override
+    public void create(User user) {
+        try (Session session = sessionFactory.openSession()) {
+            session.save(user);
+        }
+    }
 }
